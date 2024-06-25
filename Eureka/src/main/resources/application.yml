@@ -1,0 +1,21 @@
+################# 基础设置 #################
+server:
+  port: 8071
+  context-path: /
+################# 日志设置 #################
+logging:
+  config: classpath:log4j2.xml
+################# spring设置 #################
+spring:
+  application:
+    name: eureka-center
+      
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+    instance-id: ${spring.application.name}:${spring.application.name}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-center:8071/eureka/ 
+    register-with-eureka: false
+    fetch-registry: false   

@@ -1,0 +1,11 @@
+################# 基础设置 #################
+server:
+  port: 8075
+  context-path: /
+################# 日志设置 #################
+logging:
+  config: classpath:log4j2.xml
+################# spring设置 #################
+spring:
+  application:
+    name: config-client

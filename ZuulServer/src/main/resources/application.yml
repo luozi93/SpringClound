@@ -1,0 +1,32 @@
+################# 基础设置 #################
+server:
+  port: 8076
+  context-path: /
+################# 日志设置 #################
+logging:
+  config: classpath:log4j2.xml
+################# spring设置 #################
+spring:
+  application:
+    name: zuul-server
+  zipkin:
+    base-url: http://zipkin-server:8077
+  sleuth:
+    sampler:
+      percentage: 1.0
+      
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+    instance-id: ${spring.application.name}:${spring.application.name}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-center:8071/eureka/ 
+
+zuul:
+  add-host-header: true #防止跳转暴露真实地址
+  routes:
+    eureka-consumer:
+      serviceId: eureka-consumer  #修改路由规则,不配置为默认规则 :serviceId + 接口地址 
+      path: /eureka-consumer/**       
+  #ignored-services: eureka-producer  #设置不需要暴露的serviceId
